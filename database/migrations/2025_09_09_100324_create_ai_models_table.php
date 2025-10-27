@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('ai_models', function (Blueprint $table) {
+            $table->id('model_id');
+            $table->string('ml_algorithm');
+            $table->float('accuracy');
+            $table->float('f1_score');
+            $table->string('model_version'); // Added from your class diagram
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('ai_models');
+    }
+};
