@@ -54,8 +54,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+   /**
+     * Get the tomato plant images for the user.
+     */
     public function images()
-{
-    return $this->hasMany(TomatoPlantImage::class, 'farmer_id');
-}
+    {
+        return $this->hasMany(\App\Models\TomatoPlantImage::class, 'farmer_id');
+    }
 }

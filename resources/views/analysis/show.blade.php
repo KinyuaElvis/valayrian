@@ -6,7 +6,7 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-8 bg-white border-b border-gray-200">
-                    <h2 class="text-2xl font-semibold mb-6">Analysis Report - {{ $result->analysis_timestamp->format('M d, Y H:i A') }}</h2>
+                    <h2 class="text-2xl font-semibold mb-6">Analysis Report - {{ \Carbon\Carbon::parse($result->analysis_timestamp)->format('d M Y H:i') }}</h2>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Left side: Image -->
@@ -43,12 +43,14 @@
                     <div class="mt-8">
                         <h3 class="font-bold mb-2">Recommended Interventions</h3>
                         <div class="space-y-2">
-                            @foreach($result->recommendations as $recommendation)
-                                <div class="border rounded-lg p-3">
-                                    <h4 class="font-semibold">&#9658; [{{ $loop->iteration }}. {{ $recommendation->recommendation_type }}]</h4>
-                                    <p class="text-gray-700 ml-5">{{ $recommendation->recommendation_text }}</p>
-                                </div>
-                            @endforeach
+                    @if(isset($interventions) && count($interventions))
+                    <h3>Recommended Interventions</h3>
+                    <ul>
+                    @foreach($interventions as $item)
+                    <li>{{ $item }}</li>
+                    @endforeach
+                    </ul>
+                    @endif
                         </div>
                     </div>
                     

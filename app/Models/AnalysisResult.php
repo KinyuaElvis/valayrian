@@ -15,6 +15,7 @@ class AnalysisResult extends Model
      *
      * @var array<int, string>
      */
+    protected $primaryKey = 'result_id';
     protected $fillable = [
         'image_id',         // Foreign key to the image
         'detection_status', // The field the error mentioned
@@ -33,10 +34,10 @@ class AnalysisResult extends Model
     /**
      * Get the image that this analysis result belongs to.
      */
-    public function tomatoPlantImage()
-    {
-        return $this->belongsTo(TomatoPlantImage::class, 'image_id');
-    }
+    public function image()
+{
+    return $this->belongsTo(TomatoPlantImage::class, 'image_id', 'image_id');
+}
 
     public function recommendations()
 {

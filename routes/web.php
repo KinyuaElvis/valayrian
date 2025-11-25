@@ -32,22 +32,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     })->middleware('auth:admin')->name('dashboard');
 });
 
-// Admin Authentication Routes
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/login', [AdminAuthController::class, 'create'])->name('login');
-    Route::post('/login', [AdminAuthController::class, 'store']);
-    Route::post('/logout', [AdminAuthController::class, 'destroy'])->middleware('auth:admin')->name('logout');
-    
-    // Admin Registration
-    Route::get('/register', [AdminRegisterController::class, 'create'])->name('register');
-    Route::post('/register', [AdminRegisterController::class, 'store']);
-    
-    // Admin Dashboard
-    Route::get('/dashboard', function () {
-        return 'Admin Dashboard'; // Placeholder
-    })->middleware('auth:admin')->name('dashboard');
-});
-
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -76,7 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/analyze', [PestAnalysisController::class, 'store'])->name('analysis.store');
 
     // Route to show the results of a specific analysis
-    Route::get('/analysis/{result}', [PestAnalysisController::class, 'show'])->name('analysis.show');
+    Route::get('analysis/{result}', [PestAnalysisController::class, 'show'])->name('analysis.show');
 
     // Route for the user's history/dashboard
     Route::get('/dashboard', [PestAnalysisController::class, 'index'])->name('dashboard');
